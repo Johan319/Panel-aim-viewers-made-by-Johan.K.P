@@ -1,5 +1,5 @@
 --vexen
-local key = "N" -- toggle keybind
+local key = Enum.KeyCode.F1 -- set to F1 key
 
 
 
@@ -33,6 +33,7 @@ local Desyncmode = Instance.new("TextButton")
 local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_10 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
+local UIS = game:GetService("UserInputService")  -- Get UserInputService
 
 --Properties:
 
@@ -511,11 +512,12 @@ game:GetService("RunService").Heartbeat:Connect(function()
 	hrp.Velocity = oldv
 	hrp.AssemblyLinearVelocity = oldv -- needed? cba to check
 end)
-mouse = game.Players.LocalPlayer:GetMouse()
-mouse.KeyDown:Connect(function(e)
-	if e == key then
-		MainHolder.Visible = not MainHolder.Visible
-	end
+-- KeyPress event to toggle MainHolder visibility with F1
+UIS.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end  -- Prevent processing if the game already handled the input
+    if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == key then
+        MainHolder.Visible = not MainHolder.Visible  -- Toggle visibility
+    end
 end)
 while true do
 	task.spawn(function()
