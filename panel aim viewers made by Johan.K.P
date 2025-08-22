@@ -34,8 +34,117 @@ local UIAspectRatioConstraint_9 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_10 = Instance.new("UIAspectRatioConstraint")
 local UIAspectRatioConstraint_11 = Instance.new("UIAspectRatioConstraint")
 local UIS = game:GetService("UserInputService")  -- Get UserInputService
+-- Create Settings Panel
+local SettingsPanel = Instance.new("Frame")
+local SettingsTitle = Instance.new("TextLabel")
+local CloseSettingsButton = Instance.new("TextButton")
 
+-- Create the button to open settings
+local SettingsButton = Instance.new("TextButton")
 --Properties:
+
+-- Add Settings Panel properties
+SettingsPanel.Name = "SettingsPanel"
+SettingsPanel.Parent = MrPoopyButthole
+SettingsPanel.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
+SettingsPanel.Position = UDim2.new(0.5, -150, 0.25, 0)  -- Center the panel
+SettingsPanel.Size = UDim2.new(0.3, 0, 0.35, 0)
+SettingsPanel.Visible = false -- Initially hidden
+
+local UICorner_Settings = Instance.new("UICorner")
+UICorner_Settings.Parent = SettingsPanel
+
+
+-- Add Settings Panel properties
+SettingsPanel.Name = "SettingsPanel"
+SettingsPanel.Parent = MrPoopyButthole
+SettingsPanel.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
+SettingsPanel.Position = UDim2.new(0.5, -150, 0.25, 0)  -- Center the panel
+SettingsPanel.Size = UDim2.new(0.3, 0, 0.35, 0)
+SettingsPanel.Visible = false -- Initially hidden
+
+local UICorner_Settings = Instance.new("UICorner")
+UICorner_Settings.Parent = SettingsPanel
+
+SettingsTitle.Name = "SettingsTitle"
+SettingsTitle.Parent = SettingsPanel
+SettingsTitle.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
+SettingsTitle.BorderSizePixel = 0
+SettingsTitle.Size = UDim2.new(1, 0, 0.1, 0)
+SettingsTitle.Font = Enum.Font.Fondamento
+SettingsTitle.Text = "Settings Panel"
+SettingsTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+SettingsTitle.TextScaled = true
+SettingsTitle.TextSize = 14
+SettingsTitle.TextWrapped = true
+
+-- Close Settings Button
+CloseSettingsButton.Name = "CloseSettingsButton"
+CloseSettingsButton.Parent = SettingsPanel
+CloseSettingsButton.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+CloseSettingsButton.Size = UDim2.new(0.5, 0, 0.2, 0)
+CloseSettingsButton.Position = UDim2.new(0.25, 0, 0.8, 0)
+CloseSettingsButton.Text = "Close Settings"
+CloseSettingsButton.TextColor3 = Color3.fromRGB(232, 15, 30)
+CloseSettingsButton.TextScaled = true
+CloseSettingsButton.TextSize = 14
+CloseSettingsButton.TextWrapped = true
+
+UICorner_Settings.Parent = CloseSettingsButton
+
+-- Add the button to open the settings, aligned like the title
+SettingsButton.Name = "SettingsButton"
+SettingsButton.Parent = MainHolder
+SettingsButton.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+SettingsButton.Size = UDim2.new(0.2, 0, 0.1, 0)  -- Size of the button
+SettingsButton.Position = UDim2.new(0.5, -250, 0.03, 0)  -- Positioned at the top, like the title
+SettingsButton.Text = "Settings"
+SettingsButton.TextColor3 = Color3.fromRGB(232, 15, 30)
+SettingsButton.TextScaled = true
+SettingsButton.TextSize = 14
+SettingsButton.TextWrapped = true
+
+UICorner_Settings.Parent = SettingsButton
+
+-- Toggle Settings Panel Visibility
+SettingsButton.MouseButton1Click:Connect(function()
+    SettingsPanel.Visible = true -- Show the settings panel
+end)
+
+-- Close Settings Panel
+CloseSettingsButton.MouseButton1Click:Connect(function()
+    SettingsPanel.Visible = false -- Hide the settings panel
+end)
+
+-- DRAGGING CODE for Settings Panel
+local dragToggle = nil
+local dragStart = nil
+local startPos = nil
+
+-- Function to enable dragging of the Settings Panel
+SettingsPanel.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragToggle = true
+        dragStart = input.Position
+        startPos = SettingsPanel.Position
+    end
+end)
+
+-- Function to update position while dragging
+SettingsPanel.InputChanged:Connect(function(input)
+    if dragToggle and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        SettingsPanel.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+-- Function to stop dragging when mouse button is released
+SettingsPanel.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragToggle = false
+    end
+end)
 
 MrPoopyButthole.Name = "MrPoopyButthole"
 MrPoopyButthole.Parent = game.CoreGui
@@ -43,7 +152,7 @@ MrPoopyButthole.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 MainHolder.Name = "MainHolder"
 MainHolder.Parent = MrPoopyButthole
-MainHolder.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
+MainHolder.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
 MainHolder.BorderSizePixel = 0
 MainHolder.Position = UDim2.new(0.5264256, 0, 0.359375, 0)
 MainHolder.Size = UDim2.new(0.323365778, 0, 0.329687506, 0)
@@ -52,7 +161,7 @@ UICorner.Parent = MainHolder
 
 Title.Name = "Title"
 Title.Parent = MainHolder
-Title.BackgroundColor3 = Color3.fromRGB(76, 76, 76)
+Title.BackgroundColor3 = Color3.fromRGB(28, 28, 28)
 Title.BorderSizePixel = 0
 Title.Position = UDim2.new(0.313978493, 0, 0, 0)
 Title.Size = UDim2.new(0.430107534, 0, 0.104265399, 0)
@@ -62,12 +171,6 @@ Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.TextScaled = true
 Title.TextSize = 14.000
 Title.TextWrapped = true
-
-Uselesswhitethingymabob.Name = "Useless white thingy ma bob"
-Uselesswhitethingymabob.Parent = MainHolder
-Uselesswhitethingymabob.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Uselesswhitethingymabob.Position = UDim2.new(0, 0, 0.104265399, 0)
-Uselesswhitethingymabob.Size = UDim2.new(1, 0, 0.0284360182, 0)
 
 Viewer.Name = "Viewer"
 Viewer.Parent = MainHolder
