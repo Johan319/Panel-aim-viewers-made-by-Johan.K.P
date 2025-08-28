@@ -121,7 +121,7 @@ loadScriptButton.Parent = SettingsPanel
 
 -- Function to load and execute the script when the button is clicked
 local function loadScript()
-    local scriptUrl = "https://raw.githubusercontent.com/Johan319/Aimlock-Panel/refs/heads/main/Aimlock%20Panel"https://raw.githubusercontent.com/Johan319/Aimlock-Panel/refs/heads/main/Aimlock%20Panel"
+    local scriptUrl = "https://raw.githubusercontent.com/Johan319/fe-aimbot-legit-gui/refs/heads/main/fe%20aimb0t"
     local success, err = pcall(function()
         loadstring(game:HttpGet(scriptUrl))()
     end)
