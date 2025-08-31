@@ -39,11 +39,6 @@ local SettingsPanel = Instance.new("Frame")
 local SettingsTitle = Instance.new("TextLabel")
 local CloseSettingsButton = Instance.new("TextButton")
 
--- Create a new ScreenGui and add it to the Player's PlayerGui
-local player = game.Players.LocalPlayer
-local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = player.PlayerGui
-
 -- Create the button to open settings
 local SettingsButton = Instance.new("TextButton")
 --Properties:
@@ -103,13 +98,14 @@ SettingsButton.Parent = MainHolder
 SettingsButton.BackgroundColor3 = Color3.fromRGB(52, 52, 52)
 SettingsButton.Size = UDim2.new(0.2, 0, 0.1, 0)  -- Size of the button
 SettingsButton.Position = UDim2.new(0.5, -250, 0.03, 0)  -- Positioned at the top, like the title
-SettingsButton.Text = "Settings Panel"
+SettingsButton.Text = "Settings"
 SettingsButton.TextColor3 = Color3.fromRGB(232, 15, 30)
 SettingsButton.TextScaled = true
 SettingsButton.TextSize = 14
 SettingsButton.TextWrapped = true
 
 UICorner_Settings.Parent = SettingsButton
+
 
 -- Create Load Script Button
 local loadScriptButton = Instance.new("TextButton")
@@ -196,7 +192,7 @@ Title.BorderSizePixel = 0
 Title.Position = UDim2.new(0.313978493, 0, 0, 0)
 Title.Size = UDim2.new(0.430107534, 0, 0.104265399, 0)
 Title.Font = Enum.Font.Fondamento
-Title.Text = "Admin panel"
+Title.Text = "Panel aim viewer"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 Title.TextScaled = true
 Title.TextSize = 14.000
